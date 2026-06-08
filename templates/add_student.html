@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Data Ingestion Portal</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f6f9; color: #2d3748; padding: 40px; margin: 0; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        h1 { margin-top: 0; color: #1a202c; font-size: 22px; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; color: #4a5568; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        input:focus { outline: none; border-color: #4f46e5; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-submit { background: #4f46e5; color: white; padding: 12px; border: none; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; transition: background 0.2s; }
+        .btn-submit:hover { background: #4338ca; }
+        .btn-back { display: block; text-align: center; margin-top: 15px; color: #718096; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Student Record Ingestion Portal</h1>
+        
+        <form action="/add" method="POST">
+            
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Roll Number</label>
+                    <input type="number" name="roll_no" required min="1">
+                </div>
+                <div class="form-group">
+                    <label>Admission Number (Primary Key)</label>
+                    <input type="number" name="adm_no" required>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="e.g., Anna">
+                </div>
+                <div class="form-group">
+                    <label>Class & Section</label>
+                    <input type="text" name="student_class" required placeholder="e.g., 6A">
+                </div>
+            </div>
+
+            <h3 style="margin-top: 25px; color: #4f46e5; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; font-size: 16px;">Academic Metrics (Scale 0 - 100)</h3>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>English</label>
+                    <input type="number" name="english" required min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label>Mathematics</label>
+                    <input type="number" name="mathematics" required min="0" max="100">
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Science</label>
+                    <input type="number" name="science" required min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label>Social Science</label>
+                    <input type="number" name="social_science" required min="0" max="100">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Hindi</label>
+                <input type="number" name="hindi" required min="0" max="100">
+            </div>
+
+            <button type="submit" class="btn-submit">Commit Record to Database</button>
+            <a href="/" class="btn-back">← Cancel and Return to Dashboard</a>
+        </form>
+    </div>
+
+</body>
+</html>

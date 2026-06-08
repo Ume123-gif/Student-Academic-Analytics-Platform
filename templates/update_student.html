@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Academic Records</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f4f6f9; color: #2d3748; padding: 40px; margin: 0; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
+        h1 { margin-top: 0; color: #1a202c; font-size: 22px; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; color: #4a5568; font-size: 14px; }
+        input { width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 14px; background-color: #fff; }
+        input:disabled { background-color: #f8fafc; color: #a0aec0; cursor: not-allowed; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-submit { background: #4f46e5; color: white; padding: 12px; border: none; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 16px; margin-top: 15px; }
+        .btn-submit:hover { background: #4338ca; }
+        .btn-back { display: block; text-align: center; margin-top: 15px; color: #718096; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Modify Records for: {{ student['NAME'] }}</h1>
+        <p style="color: #718096; margin-top: -10px; margin-bottom: 20px;">Admission Number: {{ student['ADM_NO'] }} | Class: {{ student['CLASS'] }}</p>
+        
+        <form action="/update/{{ student['ADM_NO'] }}" method="POST">
+            
+            <h3 style="color: #4f46e5; border-bottom: 1px solid #e2e8f0; padding-bottom: 5px; font-size: 16px;">Update Performance Scores (0 - 100)</h3>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>English</label>
+                    <input type="number" name="english" required min="0" max="100" value="{{ student['ENGLISH'] }}">
+                </div>
+                <div class="form-group">
+                    <label>Mathematics</label>
+                    <input type="number" name="mathematics" required min="0" max="100" value="{{ student['MATHEMATICS'] }}">
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Science</label>
+                    <input type="number" name="science" required min="0" max="100" value="{{ student['SCIENCE'] }}">
+                </div>
+                <div class="form-group">
+                    <label>Social Science</label>
+                    <input type="number" name="social_science" required min="0" max="100" value="{{ student['SOCIAL_SCIENCE'] }}">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Hindi</label>
+                <input type="number" name="hindi" required min="0" max="100" value="{{ student['HINDI'] }}">
+            </div>
+
+            <button type="submit" class="btn-submit">Save and Commit Changes</button>
+            <a href="/" class="btn-back">← Discard Changes and Return</a>
+        </form>
+    </div>
+
+</body>
+</html>

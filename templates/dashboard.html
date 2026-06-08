@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Analytics Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-main: #2d3748;
+            --primary: #4f46e5;
+            --success: #10b981;
+            --danger: #ef4444;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 25px;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 20px;
+        }
+        h1, h2 { margin: 0; color: #1a202c; }
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .btn:hover { background-color: #4338ca; }
+        
+        /* Grid Layout for Analytics Summary Cards */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        .card h3 { margin: 0 0 10px 0; font-size: 13px; color: #718096; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat { font-size: 26px; font-weight: bold; color: var(--primary); }
+        .stat-group { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; border-top: 1px solid #f1f5f9; padding-top: 5px; }
+
+        /* Multi-Column Dashboard Content Grid */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 30px;
+        }
+
+        /* Standardized Enterprise Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            margin-top: 15px;
+        }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { background-color: #f8fafc; font-weight: 600; color: #4a5568; font-size: 14px; }
+        td { font-size: 14px; }
+        tr:hover { background-color: #f8fafc; }
+        
+        /* Status Badges */
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .badge-pass { background-color: #d1fae5; color: var(--success); }
+        .badge-fail { background-color: #fee2e2; color: var(--danger); }
+        
+        .edit-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .edit-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="header">
+            <div>
+                <h1>Academic Performance Analytics System</h1>
+                <p style="color: #718096; margin: 5px 0 0 0;">University Record Operational Database Engine</p>
+            </div>
+            <a href="/add" class="btn">+ Register New Student Data</a>
+        </div>
+
+        <h2>Subject Performance Insights</h2>
+        <div class="analytics-grid" style="margin-top:15px;">
+            <div class="card">
+                <h3>English</h3>
+                <div class="stat">{{ "%.2f"|format(analysis['avg_eng'] or 0) }}%</div>
+                <div class="stat-group">
+                    <span style="color:var(--success); font-weight:600;">Max: {{ analysis['max_eng'] or 0 }}</span>
+                    <span style="color:var(--danger); font-weight:600;">Min: {{ analysis['min_eng'] or 0 }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Mathematics</h3>
+                <div class="stat">{{ "%.2f"|format(analysis['avg_mat'] or 0) }}%</div>
+                <div class="stat-group">
+                    <span style="color:var(--success); font-weight:600;">Max: {{ analysis['max_mat'] or 0 }}</span>
+                    <span style="color:var(--danger); font-weight:600;">Min: {{ analysis['min_mat'] or 0 }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Science</h3>
+                <div class="stat">{{ "%.2f"|format(analysis['avg_sci'] or 0) }}%</div>
+                <div class="stat-group">
+                    <span style="color:var(--success); font-weight:600;">Max: {{ analysis['max_sci'] or 0 }}</span>
+                    <span style="color:var(--danger); font-weight:600;">Min: {{ analysis['min_sci'] or 0 }}</span>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Social Science</h3>
+                <div class="stat">{{ "%.2f"|format(analysis['avg_soc'] or 0) }}%</div>
+                <div class="stat-group">
+                    <span style="color:var(--success); font-weight:600;">Max: {{ analysis['max_soc'] or 0 }}</span>
+                    <span style="color:var(--danger); font-weight:600;">Min: {{ analysis['min_soc'] or 0 }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-layout">
+            
+            <div>
+                <h2>Comprehensive Student Roster</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Roll No</th>
+                            <th>Adm No</th>
+                            <th>Name</th>
+                            <th>Class</th>
+                            <th>ENG</th>
+                            <th>MATH</th>
+                            <th>SCI</th>
+                            <th>S.SCI</th>
+                            <th>Total</th>
+                            <th>Percentage</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>{{ student['ROLL_NO'] }}</td>
+                            <td>{{ student['ADM_NO'] }}</td>
+                            <td><strong>{{ student['NAME'] }}</strong></td>
+                            <td>{{ student['CLASS'] }}</td>
+                            <td>{{ student['ENGLISH'] }} <small style="color:#718096">({{ student['GR1'] }})</small></td>
+                            <td>{{ student['MATHEMATICS'] }} <small style="color:#718096">({{ student['GR3'] }})</small></td>
+                            <td>{{ student['SCIENCE'] }} <small style="color:#718096">({{ student['GR4'] }})</small></td>
+                            <td>{{ student['SOCIAL_SCIENCE'] }} <small style="color:#718096">({{ student['GR5'] }})</small></td>
+                            <td><strong>{{ student['TOTAL'] }}</strong></td>
+                            <td style="font-weight: 600; color: var(--primary);">{{ student['PERCENTAGE'] }}%</td>
+                            <td>
+                                {% if student['RESULT'] == 'PASS' %}
+                                <span class="badge badge-pass">PASS</span>
+                                {% else %}
+                                <span class="badge badge-fail">FAIL</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="/update/{{ student['ADM_NO'] }}" class="edit-link">Edit Grades</a>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="12" style="text-align: center; color: #718096; padding: 40px; font-weight: 500;">
+                                📭 No records found in database pipelines. Student dataset is currently unpopulated.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <h2>Ranked Merit List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Student Name</th>
+                            <th>Aggregate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rank in merit_list %}
+                        <tr>
+                            <td style="font-weight: 600; color: #718096;">#{{ loop.index }}</td>
+                            <td><strong>{{ rank['NAME'] }}</strong></td>
+                            <td style="font-weight: bold; color: var(--success);">{{ rank['PERCENTAGE'] }}%</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #718096; padding: 20px; font-size: 13px;">
+                                No records to rank.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
