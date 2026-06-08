@@ -1,9 +1,9 @@
 # Student Academic Analytics Platform 📊
 
-An enterprise-ready, full-stack student record management and performance analytics engine. This project refactors legacy structural data code into a robust, web-based application utilizing a modern Model-View-Controller (MVC) architecture.
+An enterprise-ready, full-stack student record management and performance analytics engine. This project refactors my Class XII legacy structural data code into a robust, web-based application utilizing a modern Model-View-Controller (MVC) architecture.
 
 ## 🚀 Core Features
-- **Full Ingestion Pipeline (CRUD):** Users can securely register new records, fetch current profiles, and modify performance marks on-the-fly via interactive forms.
+- **Full Ingestion Pipeline (CRUD):** Users can securely register new records, fetch current profiles, and update performance marks on-the-fly via interactive forms.
 - **Relational Integrity Schema:** Powered by SQLite3 with strict table-level constraints (`PRIMARY KEY`, `NOT NULL`, `CHECK BETWEEN 0 AND 100`) to guarantee absolute data consistency.
 - **Real-Time Data Analytics:** Leverages optimized SQL aggregate pipelines (`AVG()`, `MAX()`, `MIN()`) to instantly compute subject-level trends and performance insights.
 - **Dynamic Ranked Merit List:** Automatically tracks, computes, and updates a live scoreboard ordering students dynamically by their weighted aggregate percentages.
